@@ -37,7 +37,7 @@ export DOCKER_HOST="unix:///$(pwd)/docker.sock"
 
 # or to store in a central location
 ssh -nNT -L ${HOME}/docker_sockets/docker.sock:/var/run/docker.sock user@machine-ip-or-dns &
-export DOCKER_HOST=${HOME}/docker_sockets/docker.sock
+export DOCKER_HOST=unix:///${HOME}/docker_sockets/docker.sock
 
 # Compatibility with Server API, our client by default uses API v1.40, since it is Version: 19.03.1
 export DOCKER_API_VERSION=1.39

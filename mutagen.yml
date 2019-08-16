@@ -1,13 +1,3 @@
-forward:
-  defaults:
-    socket:
-      overwriteMode: "overwrite"
-  # remoteDocker:
-  #   source: "unix:docker.sock"
-  #   destination: "drone.internal:unix:/var/run/docker.sock"
-  #   socket:
-  #     owner: "root"
-
 sync:
   development:
     alpha: "./test_folder"
