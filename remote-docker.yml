@@ -1,0 +1,12 @@
+daemons:
+  - host: "drone.internal"
+    sshconfig: true
+  - host: "dream.ubuntu.18.04"
+    sshconfig: false
+    hostname: "127.0.0.1"
+    port: 4683
+    user: "dream"
+
+socket:
+  path: "${HOME}/docker_sockets"
+  remove: true
