@@ -29,13 +29,51 @@ mutagen project start
 mutagen project start mutagen-custom.yml
 ```
 
+## Mutagen Docker Socket Forwarded via Forwards
+
+```YAML
+forward:
+  defaults:
+    socket:
+      overwriteMode: "overwrite"
+  remoteDocker:
+    source: "tcp:localhost:23750"
+    destination: "user@machine-ip-or-dns:unix:/var/run/docker.sock"
+    # or you can use an ~/.ssh/config aware host name such as
+    destination: "docker.dev:unix:/var/run/docker.sock"
+```
+
+- Export Docker env vars to connect
+
+```Bash
+export DOCKER_HOST=tcp://localhost:23750
+# Compatibility with Server API, our client by default uses API v1.40, since it is Version: 19.03.1
+export DOCKER_API_VERSION=1.39
+```
+
+- Now docker commands send context to remote daemon
+
+```Bash
+docker build -t test_mutagen:latest .
+
+Sending build context to Docker daemon  80.38kB
+Step 1/2 : FROM python:3.6-slim
+ ---> 8aa59c33d0d5
+Step 2/2 : RUN mkdir -p /usr/src/app
+ ---> Running in 8bd070aadc9d
+Removing intermediate container 8bd070aadc9d
+ ---> 74409dd6285e
+Successfully built 74409dd6285e
+Successfully tagged test_mutagen:latest
+```
+
 ## Setup Docker Client with Forwarded Socket/Port Manually
 
 ```Bash
 ssh -nNT -L $(pwd)/docker.sock:/var/run/docker.sock user@machine-ip-or-dns &
 export DOCKER_HOST="unix:///$(pwd)/docker.sock"
 
-# or to store in a central location
+# or to store in a central older location
 ssh -nNT -L ${HOME}/docker_sockets/docker.sock:/var/run/docker.sock user@machine-ip-or-dns &
 export DOCKER_HOST=unix:///${HOME}/docker_sockets/docker.sock
 
@@ -44,6 +82,7 @@ export DOCKER_API_VERSION=1.39
 
 # Debug with docker version or docker info
 docker version
+
 Client: Docker Engine - Community
  Version:           19.03.1
  API version:       1.39
