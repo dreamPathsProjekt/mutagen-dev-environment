@@ -51,6 +51,12 @@ export DOCKER_HOST=tcp://localhost:23750
 export DOCKER_API_VERSION=1.39
 ```
 
+- Or use the helper script, after modifying `<docker-daemon-host>:<port>` & `API_VERSION` variables
+
+```Bash
+source docker_client.sh
+```
+
 - Now docker commands send context to remote daemon
 
 ```Bash
