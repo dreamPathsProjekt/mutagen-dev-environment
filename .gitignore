@@ -114,9 +114,9 @@ pytest.ini
 db.sqlite3
 .vscode
 
-# Secrets - env files
+# Secrets - env files - temporarily enabled to view source file
 
-*.env
+# *.env
 *.pub
 environments/
 *.pub
