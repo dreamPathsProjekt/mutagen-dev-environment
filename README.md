@@ -141,3 +141,5 @@ mutagen project start
 # Make some edits on test_file.txt and use below command to monitor changes
 mutagen sync monitor
 ```
+
+> On some occasions, the forward session to remote __docker daemon__ cannot be terminated with `mutagen project terminate`. Try to terminate the session with `mutagen daemon stop`.
