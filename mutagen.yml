@@ -1,21 +1,18 @@
 sync:
   development:
     alpha: "./test_folder"
-    beta: "drone.internal:~/test_folder"
+    beta: "mutagen.demo:~/test_folder"
     mode: "one-way-safe"
     ignore:
       vcs: true
       # paths:
       #   - "./build/"
-      #   - "./node_modules"
+      #   - "./node_modules/"
 
 forward:
   defaults:
     socket:
       overwriteMode: "overwrite"
-  exposeHttp:
-    source: "tcp:localhost:8080"
-    destination: "drone.internal:tcp:localhost:80"
-  remoteDocker:
-    source: "tcp:localhost:23750"
-    destination: "drone.internal:unix:/var/run/docker.sock"
+  portainerHttp:
+    source: "tcp:localhost:9000"
+    destination: "mutagen.demo:tcp:localhost:9000"

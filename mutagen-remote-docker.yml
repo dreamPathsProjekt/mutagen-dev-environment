@@ -1,0 +1,4 @@
+forward:
+  remoteDocker:
+    source: "tcp:localhost:23750"
+    destination: "mutagen.demo:unix:/var/run/docker.sock"

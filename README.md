@@ -109,3 +109,25 @@ Server: Docker Engine - Community
   Experimental:     false
 
 ```
+
+## Demo Usage
+
+- The current demo has 2 mutagen orchestration files.
+- [mutagen-remote-docker.yml](./mutagen-remote-docker.yml) forwards the `/var/run/docker.sock` to `localhost:23750` in order to connect the docker client
+- [mutagen.yml](./mutagen.yml) is the `global configuration file` and syncs `test_folder` and also forwards `portainer` http port.
+
+```Bash
+# Forward the docker daemon & export appropriate docker environment variables to connect with the server
+mutagen project start mutagen-remote-docker.yml --no-global-configuration
+export DOCKER_HOST=tcp://localhost:23750
+export DOCKER_API_VERSION=1.39
+
+# Start the portainer service on remote dev server, as described in portainer.yml file
+docker-compose -f portainer.yml up -d portainer
+
+# Use the global configuration file mutagen.yml to reverse proxy port 9000 (Portainer) & sync test_folder.
+mutagen project start
+
+# Make some edits on test_file.txt and use below command to monitor changes
+mutagen sync monitor
+```

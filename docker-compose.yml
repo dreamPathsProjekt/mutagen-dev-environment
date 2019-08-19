@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mutagen_test:latest
+    environment:
+      PROD: "0"
+    # volumes:
+    #   - ./base:/usr/src/app/base
+    ports:
+      - '8000:8000'
