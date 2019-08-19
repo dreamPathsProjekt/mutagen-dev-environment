@@ -117,6 +117,16 @@ Server: Docker Engine - Community
 - [mutagen.yml](./mutagen.yml) is the `global configuration file` and syncs `test_folder` and also forwards `portainer` http port.
 
 ```Bash
+# Setup your remote dev server with an .ssh/config entry
+vim ~/.ssh/config
+
+# Add an ssh entry like the following example and save. If the name is different to mutagen.demo you should also replace with correct name on mutagen.yml & mutagen-remote-docker.yml
+Host mutagen.demo
+Hostname 52.45.204.115 # Ip address of the host
+IdentityFile ~/.ssh/mutagen_test.pem # Private key
+User ubuntu
+Port 22
+
 # Forward the docker daemon & export appropriate docker environment variables to connect with the server
 mutagen project start mutagen-remote-docker.yml --no-global-configuration
 export DOCKER_HOST=tcp://localhost:23750
