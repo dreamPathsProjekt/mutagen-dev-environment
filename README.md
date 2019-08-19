@@ -79,7 +79,7 @@ Successfully tagged test_mutagen:latest
 ssh -nNT -L $(pwd)/docker.sock:/var/run/docker.sock user@machine-ip-or-dns &
 export DOCKER_HOST="unix:///$(pwd)/docker.sock"
 
-# or to store in a central older location
+# or to store in a central folder location
 ssh -nNT -L ${HOME}/docker_sockets/docker.sock:/var/run/docker.sock user@machine-ip-or-dns &
 export DOCKER_HOST=unix:///${HOME}/docker_sockets/docker.sock
 
